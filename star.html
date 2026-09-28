@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Talent | Macula Egypt</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="assets/style.css">
+
+<style>
+/* Client/Talent social links */
+.client-socials{
+  margin-top:28px;
+  padding-top:24px;
+  border-top:1px solid rgba(255,255,255,.09);
+}
+.client-socials-title{
+  display:block;
+  margin-bottom:12px;
+  color:var(--muted,#aaa);
+  font-size:12px;
+  font-weight:800;
+}
+.client-socials-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.client-social{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(255,255,255,.13);
+  background:rgba(255,255,255,.035);
+  color:var(--white,#fff);
+  transition:transform .25s ease,border-color .25s ease,background .25s ease,box-shadow .25s ease;
+}
+.client-social:hover{
+  transform:translateY(-4px);
+  border-color:var(--magenta,#ec1587);
+  background:rgba(236,21,135,.12);
+  box-shadow:0 10px 24px rgba(236,21,135,.18);
+}
+.client-social svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.client-social.facebook svg{fill:currentColor;stroke:none}
+.client-social.tiktok svg{fill:currentColor;stroke:none}
+.client-social.snapchat svg{fill:currentColor;stroke:none}
+@media(max-width:600px){
+  .client-social{width:42px;height:42px}
+}
+
+.star-hero .frame{width:min(520px,100%);height:auto;aspect-ratio:1/1;border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 30px 90px rgba(236,21,135,.18);background:#111;}
+.star-hero .frame img{width:100%;height:100%;object-fit:cover;border:0;border-radius:0;}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">
+    <img src="assets/logo.png" alt="Macula Egypt logo">
+    <div>
+      <span class="eng">MACULA</span>
+      <small>Advertising & Digital Marketing</small>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#stars">Macula Talents</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a class="btn btn-primary" href="https://wa.me/201090950332" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+<div class="nav-tools"><button class="lang-toggle" type="button" data-lang-toggle aria-label="Switch language">العربية</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme"><span class="theme-icon">☾</span></button></div>
+  <button class="burger" aria-label="menu">☰</button>
+</nav>
+
+<div class="tile-field" style="position:fixed;"></div>
+<div class="glow-orb" style="width:420px;height:420px;background:var(--violet);top:60px;left:-100px;position:fixed;"></div>
+
+<section class="star-hero" id="starHero">
+  <!-- injected by JS -->
+</section>
+
+<section class="other-stars">
+  <div class="section-head reveal" style="margin-bottom:36px;">
+    <span class="kicker eng">More Talents</span>
+    <h2>More Macula Talents</h2>
+  </div>
+  <div class="stars-grid" id="otherGrid"></div>
+</section>
+
+<footer>
+  <div class="flogo"><img src="assets/logo.png" alt="Macula Egypt"><span class="eng">MACULA EGYPT</span></div>
+  <p>© <span id="year"></span> Macula Egypt — All rights reserved</p>
+  <p class="site-credit" data-i18n="Website by Engineer Joestave Milad">Website by Engineer Joestave Milad</p>
+</footer>
+
+<a class="wa-float" href="https://wa.me/201090950332" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+</a>
+
+<script src="assets/data.js"></script><script src="assets/live-talents.js"></script>
+<script src="assets/main.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const params = new URLSearchParams(location.search);
+  const slug = params.get('slug');
+  const talent = TALENTS.find(t => t.slug === slug) || TALENTS[0];
+
+  const lang = localStorage.getItem('macula-lang-v2') || 'en';
+  document.getElementById('pageTitle').textContent = (lang === 'ar' ? talent.nameAr : talent.name) + ' | Macula Egypt';
+
+  const statCardsHtml = (talent.stats || []).map(s => `
+    <div class="stat-card"><b>${s.value}</b><span>${s.label}</span></div>
+  `).join('');
+
+  const socials = (typeof TALENT_SOCIALS !== 'undefined' && TALENT_SOCIALS[talent.slug])
+    ? TALENT_SOCIALS[talent.slug] : {};
+
+  const socialIcon = {
+    facebook: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v4h4v-4h3.2l.8-4H13V9c0-.6.4-1 1-1Z"/></svg>`,
+    instagram: `<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>`,
+    tiktok: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4v10.2a4.8 4.8 0 1 1-4.8-4.8c.3 0 .6 0 .8.1v3.2a1.9 1.9 0 1 0 .8 1.5V4h3.2c.2 1.7 1.2 3 3 3.5V11c-1.1-.1-2.1-.5-3-1.1V14.2A4.8 4.8 0 1 1 9.2 9.4c.3 0 .6 0 .8.1V6.3A8 8 0 1 0 17.2 14V8.1A6.2 6.2 0 0 1 14 4Z"/></svg>`,
+    snapchat: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3.3 0 5.4 2.4 5.4 5.8 0 1.8-.3 3-.2 3.8.1.7.7 1.2 1.8 1.6.4.1.6.4.5.7-.2.5-1 .7-1.7.8-.4.1-.7.2-.8.5-.2.5-.7.8-1.3.8-.6 0-1.1-.2-1.7-.6-.6-.4-1.2-.5-2-.5s-1.4.1-2 .5c-.6.4-1.1.6-1.7.6-.6 0-1.1-.3-1.3-.8-.1-.3-.4-.4-.8-.5-.7-.1-1.5-.3-1.7-.8-.1-.3.1-.6.5-.7 1.1-.4 1.7-.9 1.8-1.6.1-.8-.2-2-.2-3.8C6.6 5.4 8.7 3 12 3Z"/></svg>`
+  };
+
+  const socialLabels = {
+    facebook: lang==='ar' ? 'فيسبوك' : 'Facebook',
+    instagram: lang==='ar' ? 'إنستجرام' : 'Instagram',
+    tiktok: lang==='ar' ? 'تيك توك' : 'TikTok',
+    snapchat: lang==='ar' ? 'سناب شات' : 'Snapchat'
+  };
+
+  const socialOrder = ['facebook','instagram','tiktok','snapchat'];
+  const socialLinksHtml = socialOrder
+    .filter(key => socials[key])
+    .map(key => `
+      <a class="client-social ${key}" href="${socials[key]}" target="_blank" rel="noopener noreferrer" aria-label="${socialLabels[key]}" title="${socialLabels[key]}" onclick="event.stopPropagation()">
+        ${socialIcon[key]}
+      </a>
+    `).join('');
+
+  const socialSectionHtml = socialLinksHtml ? `
+    <div class="client-socials">
+      <span class="client-socials-title">${lang==='ar' ? 'تابع الصفحة الرسمية' : 'Official Social Profiles'}</span>
+      <div class="client-socials-row">${socialLinksHtml}</div>
+    </div>
+  ` : '';
+
+  document.getElementById('starHero').innerHTML = `
+    <div class="reveal in">
+      <div class="frame"><img src="${talent.photo}" alt="${talent.name}"></div>
+    </div>
+    <div class="reveal in">
+      <a class="back-link" href="index.html#stars">${lang==='ar'?'→ رجوع لكل النجوم':'← Back to All Talents'}</a>
+      <span class="role-pill">${lang==='ar'?talent.roleAr:talent.role}</span>
+      <h1>${lang==='ar'?talent.nameAr:talent.name}</h1>
+      <span class="en-name">${lang==='ar'?talent.name+' — '+talent.role:talent.role}</span>
+      <p class="bio">${lang==='ar'?talent.bio:(talent.bioEn||talent.bio)}</p>
+      ${statCardsHtml ? `<div class="stat-cards">${statCardsHtml}</div>` : ''}
+      ${socialSectionHtml}
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://wa.me/201090950332?text=${encodeURIComponent(lang==='ar'?'عايز أعرف أكتر عن التعاون مع '+talent.nameAr:'I would like to know more about working with '+talent.name)}" target="_blank" rel="noopener">${lang==='ar'?'تواصل بخصوص '+talent.nameAr:'Contact About '+talent.name}</a>
+        <a class="btn btn-ghost" href="tel:+201090950332">Call Us</a>
+      </div>
+    </div>
+  `;
+
+  const grid = document.getElementById('otherGrid');
+  TALENTS.filter(t => t.slug !== talent.slug).forEach((t, i) => {
+    const a = document.createElement('a');
+    a.className = 'star-card reveal';
+    a.href = `star.html?slug=${t.slug}`;
+    a.style.transitionDelay = (i % 8) * 0.05 + 's';
+    a.innerHTML = `
+      <div class="star-avatar"><img src="${t.photo}" alt="${t.name}" loading="lazy"></div>
+      <h3>${lang==='ar'?t.nameAr:t.name}</h3>
+      <div class="role">${lang==='ar'?t.roleAr:t.role}</div>
+      <div class="arrow">${lang==='ar'?'شوف التفاصيل ←':'View Details →'}</div>
+    `;
+    grid.appendChild(a);
+  });
+  document.querySelectorAll('.reveal').forEach(el => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target);} });
+    }, { threshold: .1 });
+    io.observe(el);
+  });
+</script>
+</body>
+</html>

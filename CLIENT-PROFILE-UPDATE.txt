@@ -1,0 +1,8 @@
+MACULA EGYPT CLIENT PROFILE UPDATE
+
+- 17 unique talents from assets/data.js are represented exactly once.
+- Each has a separate 1000x1000 JPG in assets/client-cards/.
+- The generated artwork uses the supplied Macula branded background and the project client photo.
+- Clicking a client opens star.html?slug=<slug>.
+- The detail page shows the client name, role, authoritative project bio, available confirmed social profiles, and a WhatsApp contact action.
+- Social URLs are taken from TALENT_SOCIALS in assets/data.js; empty entries remain empty.

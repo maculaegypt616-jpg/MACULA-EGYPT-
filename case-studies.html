@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Case Studies — MACULA EGYPT</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+body{margin:0;background:var(--bg,#08070b);color:var(--text,#fff);font-family:inherit}
+.detail-wrap{width:min(1200px,calc(100% - 40px));margin:auto;padding:130px 0 100px}
+.back{display:inline-flex;color:var(--muted,#999);text-decoration:none;margin-bottom:55px}
+.kicker{font-size:11px;letter-spacing:3px;color:#ff1594;font-weight:900}
+h1{font-size:clamp(50px,8vw,105px);line-height:.95;margin:18px 0}
+h1 span{color:#ff1594}
+.lead{max-width:760px;color:var(--muted,#999);font-size:18px;line-height:1.8}
+.content-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:65px}
+.info-card{min-height:230px;padding:28px;border:1px solid var(--line,rgba(255,255,255,.1));border-radius:20px;background:var(--panel,rgba(255,255,255,.03));transition:.3s}
+.info-card:hover{transform:translateY(-7px);border-color:#ff1594}
+.info-card span{color:#ff1594;font-size:11px;font-weight:900}
+.info-card h3{font-size:25px;margin:70px 0 10px}
+.info-card p{color:var(--muted,#999);line-height:1.7}
+.social{display:flex;gap:9px;flex-wrap:wrap;margin-top:55px}
+.social a{color:var(--text,#fff);text-decoration:none;border:1px solid var(--line,rgba(255,255,255,.1));padding:10px 15px;border-radius:999px;font-size:12px;font-weight:800}
+@media(max-width:800px){.content-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:550px){.content-grid{grid-template-columns:1fr}}
+</style>
+<style>.simple-cta{margin-top:48px}.simple-cta a{display:inline-block;background:#ff1594;color:#fff;text-decoration:none;padding:14px 22px;border-radius:999px;font-weight:900;font-size:13px}.simple-cta a:hover{transform:translateY(-2px)}</style></head>
+<body>
+<div class="detail-wrap">
+<a class="back" href="index.html">← Back to Macula</a>
+<span class="kicker">MACULA EGYPT</span>
+<h1>Ideas, execution and impact.</h1>
+<p class="lead">A closer look at selected campaigns, strategy and results.</p>
+
+<div class="content-grid">
+ <article class="info-card"><span>01</span><h3>Objective</h3><p>Define the business and communication challenge.</p></article>
+ <article class="info-card"><span>02</span><h3>Strategy & Execution</h3><p>Creative direction, talent, production and distribution.</p></article>
+ <article class="info-card"><span>03</span><h3>Results</h3><p>Measure reach, engagement, awareness and campaign impact.</p></article>
+</div>
+
+<div class="simple-cta"><a href="start-project.html" data-en="Start a Project" data-ar="ابدأ مشروعك">Start a Project</a></div>
+<div class="social">
+<a href="https://www.facebook.com/MaculaEgypt" target="_blank">Facebook</a>
+<a href="https://www.instagram.com/maculaegypt" target="_blank">Instagram</a>
+<a href="https://www.tiktok.com/@maculaegypt" target="_blank">TikTok</a>
+<a href="https://snapchat.com/t/ZptTEmix" target="_blank">Snapchat</a>
+</div>
+
+</div>
+<script>
+(function(){
+  // Detail pages always open in English.
+  try{if(!localStorage.getItem('macula-lang-v2')) localStorage.setItem('macula-lang-v2','en')}catch(e){}
+  document.documentElement.lang='en'; document.documentElement.dir='ltr';
+})();
+</script>
+</body></html>

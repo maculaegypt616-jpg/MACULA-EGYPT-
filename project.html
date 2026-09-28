@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Project | Macula Egypt</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="assets/style.css">
+
+<style>
+.project-hero{
+  width:min(1100px,calc(100% - 40px));
+  margin:0 auto;
+  padding:130px 0 40px;
+}
+.project-hero .back-link{display:inline-flex;color:var(--muted);text-decoration:none;margin-bottom:34px;font-size:13px;}
+.project-hero .tag{
+  font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--magenta-soft);display:block;margin-bottom:14px;
+}
+.project-hero h1{font-size:clamp(30px,5vw,50px);line-height:1.15;margin:0 0 10px;}
+.project-hero .project-meta{color:var(--muted);font-size:13.5px;display:block;margin-bottom:28px;}
+.project-thumb{
+  width:100%;aspect-ratio:16/9;background-size:cover;background-position:center;
+  border-radius:var(--radius-md,18px);border:1px solid rgba(255,255,255,.08);
+  margin-bottom:34px;
+}
+.project-summary{max-width:760px;color:var(--muted);font-size:16px;line-height:1.9;margin:0 0 40px;}
+.project-gallery-head{font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--white,#fff);margin:0 0 18px;}
+.project-gallery{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;
+}
+.project-gallery .g-item{
+  aspect-ratio:4/3;background-size:cover;background-position:center;
+  border-radius:14px;border:1px solid rgba(255,255,255,.08);
+}
+.project-empty{
+  border:1px dashed rgba(255,255,255,.18);
+  border-radius:16px;
+  padding:46px 26px;
+  text-align:center;
+  color:var(--muted);
+  font-size:14.5px;
+  line-height:1.9;
+}
+.project-actions{margin-top:36px;display:flex;gap:12px;flex-wrap:wrap;}
+.more-projects{width:min(1100px,calc(100% - 40px));margin:60px auto 100px;}
+.more-projects h2{font-size:13px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:0 0 22px;}
+.more-projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+@media(max-width:800px){.project-gallery,.more-projects-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:560px){.project-gallery,.more-projects-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">
+    <img src="assets/logo.png" alt="Macula Egypt logo">
+    <div>
+      <span class="eng">MACULA</span>
+      <small>Advertising & Digital Marketing</small>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html#home">Home</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#portfolio">Our Work</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a class="btn btn-primary" href="https://wa.me/201090950332" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+<div class="nav-tools"><button class="lang-toggle" type="button" data-lang-toggle aria-label="Switch language">العربية</button><button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme"><span class="theme-icon">☾</span></button></div>
+  <button class="burger" aria-label="menu">☰</button>
+</nav>
+
+<div class="tile-field" style="position:fixed;"></div>
+<div class="glow-orb" style="width:420px;height:420px;background:var(--violet);top:60px;left:-100px;position:fixed;"></div>
+
+<section class="project-hero" id="projectHero">
+  <!-- injected by JS -->
+</section>
+
+<section class="more-projects">
+  <h2 id="moreProjectsTitle">More Projects</h2>
+  <div class="more-projects-grid" id="moreProjectsGrid"></div>
+</section>
+
+<footer>
+  <div class="flogo"><img src="assets/logo.png" alt="Macula Egypt"><span class="eng">MACULA EGYPT</span></div>
+  <p>© <span id="year"></span> Macula Egypt — All rights reserved</p>
+  <p class="site-credit" data-i18n="Website by Engineer Joestave Milad">Website by Engineer Joestave Milad</p>
+</footer>
+
+<a class="wa-float" href="https://wa.me/201090950332" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+</a>
+
+<script src="assets/data.js"></script>
+<script src="assets/main.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const params = new URLSearchParams(location.search);
+  const slug = params.get('slug');
+  const project = PROJECTS.find(p => p.slug === slug) || PROJECTS[0];
+
+  const lang = localStorage.getItem('macula-lang-v2') || 'en';
+  if (lang === 'ar') { document.documentElement.lang='ar'; document.documentElement.dir='rtl'; document.body.classList.add('rtl'); }
+  document.getElementById('pageTitle').textContent = (lang === 'ar' ? project.titleAr : project.title) + ' | Macula Egypt';
+
+  const t = {
+    back: lang==='ar' ? '→ رجوع لأعمالنا' : '← Back to Our Work',
+    galleryTitle: lang==='ar' ? 'الشغل' : 'The Work',
+    emptyState: lang==='ar'
+      ? 'قسم المشروع ده هيتحدث قريبًا بالصور والفيديوهات الحقيقية بتاعت الشغل. لحد ما نضيفها، دي نبذة عن المشروع عشان تاخد فكرة عن طبيعة الشغل اللي بنقدمه.'
+      : 'This project section will be updated soon with real photos and videos from the work. Until then, here is a brief overview so you get a sense of what this project involves.',
+    cta: lang==='ar' ? 'تواصل بخصوص مشروع مشابه' : 'Contact Us About a Similar Project',
+    call: lang==='ar' ? 'اتصل بينا' : 'Call Us',
+    moreTitle: lang==='ar' ? 'مشاريع تانية' : 'More Projects'
+  };
+
+  document.getElementById('moreProjectsTitle').textContent = t.moreTitle;
+
+  const galleryHtml = (project.media && project.media.length)
+    ? `<div class="project-gallery">${project.media.map(m => `<div class="g-item" style="background-image:url('${m}')"></div>`).join('')}</div>`
+    : `<div class="project-empty">${t.emptyState}</div>`;
+
+  document.getElementById('projectHero').innerHTML = `
+    <a class="back-link" href="index.html#portfolio">${t.back}</a>
+    <span class="tag">${lang==='ar'?project.tagAr:project.tag}</span>
+    <h1>${lang==='ar'?project.titleAr:project.title}</h1>
+    <span class="project-meta">${lang==='ar'?project.metaAr:project.meta}</span>
+    <div class="project-thumb" style="background-image:url('${project.thumb}')"></div>
+    <p class="project-summary">${lang==='ar'?project.summaryAr:project.summary}</p>
+    <div class="project-gallery-head">${t.galleryTitle}</div>
+    ${galleryHtml}
+    <div class="project-actions">
+      <a class="btn btn-primary" href="https://wa.me/201090950332?text=${encodeURIComponent(lang==='ar'?'عايز أعرف أكتر عن مشروع زي '+project.titleAr:'I would like to know more about a project like '+project.title)}" target="_blank" rel="noopener">${t.cta}</a>
+      <a class="btn btn-ghost" href="tel:+201090950332">${t.call}</a>
+    </div>
+  `;
+
+  const grid = document.getElementById('moreProjectsGrid');
+  PROJECTS.filter(p => p.slug !== project.slug).forEach((p, i) => {
+    const a = document.createElement('a');
+    a.className = 'portfolio-card reveal in';
+    a.href = `project.html?slug=${p.slug}`;
+    a.style.transitionDelay = (i % 8) * 0.05 + 's';
+    a.innerHTML = `
+      <div class="portfolio-thumb" style="background-image:url('${p.thumb}')"></div>
+      <div class="portfolio-info">
+        <span class="tag">${lang==='ar'?p.tagAr:p.tag}</span>
+        <h3>${lang==='ar'?p.titleAr:p.title}</h3>
+        <span class="meta">${lang==='ar'?p.metaAr:p.meta}</span>
+      </div>
+    `;
+    grid.appendChild(a);
+  });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target);} });
+    }, { threshold: .1 });
+    io.observe(el);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+Macula Egypt update:
+- Added TikTok and Snapchat links to the social row.
+- Arabic mode now translates the visible homepage interface comprehensively.
+- Arabic language button is displayed as "الإنجليزية" while Arabic is active, so no English UI word is shown.
+- English remains the default language on first visit.
